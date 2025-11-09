@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Matching Photo Sorter</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Face Matching Photo Sorter</h1>
+            <p>Upload reference photos and find matching faces automatically</p>
+        </div>
+
+        <div class="content">
+            <!-- Reference Images Upload -->
+            <div class="upload-section">
+                <h3>📸 Step 1: Upload Reference Image(s)</h3>
+                <p>Select one or more photos of the person you want to find. Multiple images improve accuracy!</p>
+                <div class="file-input-wrapper">
+                    <input type="file" id="referenceInput" accept="image/*" multiple>
+                    <label for="referenceInput" class="file-input-label">
+                        Choose Reference Photos
+                    </label>
+                </div>
+                <div id="referenceInfo" class="file-info" style="display:none;"></div>
+                <div id="referencePreview" class="preview-container"></div>
+            </div>
+
+            <!-- Photos to Match Upload -->
+            <div class="upload-section">
+                <h3>📁 Step 2: Upload Photos to Search</h3>
+                <p>Select all the photos you want to search through for matching faces.</p>
+                <div class="file-input-wrapper">
+                    <input type="file" id="photosInput" accept="image/*" multiple>
+                    <label for="photosInput" class="file-input-label">
+                        Choose Photos to Search
+                    </label>
+                </div>
+                <div id="photosInfo" class="file-info" style="display:none;"></div>
+            </div>
+
+            <!-- Settings -->
+            <div class="settings-section">
+                <h3>⚙️ Settings</h3>
+                
+                <div class="setting-item">
+                    <label>Match Strictness (lower = stricter matching)</label>
+                    <div class="slider-container">
+                        <span>Strict</span>
+                        <input type="range" id="toleranceSlider" min="0.30" max="0.60" step="0.05" value="0.40">
+                        <span>Lenient</span>
+                        <span class="slider-value" id="toleranceValue">0.40</span>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="useCNN" checked>
+                        <label for="useCNN">Use Advanced AI Model (more accurate but slower)</label>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="qualityCheck" checked>
+                        <label for="qualityCheck">Skip low quality/blurry images</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Process Button -->
+            <button class="process-btn" id="processBtn" disabled>
+                Start Processing
+            </button>
+
+            <!-- Progress Section -->
+            <div class="progress-section" id="progressSection">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill">0%</div>
+                </div>
+                <div style="text-align: center; color: #667eea; font-weight: 600;">
+                    <span class="spinner"></span>
+                    <span id="progressText">Processing...</span>
+                </div>
+            </div>
+
+            <!-- Logs -->
+            <div class="log-section" id="logSection"></div>
+
+            <!-- Results -->
+            <div class="results-section" id="resultsSection">
+                <h3>✅ Processing Complete!</h3>
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="number" id="totalPhotos">0</div>
+                        <div class="label">Total Photos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="matchedPhotos">0</div>
+                        <div class="label">Matches Found</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="successRate">0%</div>
+                        <div class="label">Success Rate</div>
+                    </div>
+                </div>
+                <button class="download-btn" id="downloadBtn">
+                    📥 Download Matched Photos (ZIP)
+                </button>
+                <div class="matched-gallery" id="matchedGallery"></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Created by Arpit, Abhijeet & Krishna | Powered by face-api.js</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+ <script src="script.js"></script>   
+    
+</body>
+</html>
