@@ -6,7 +6,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #dff16c 0%, #78f19e 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -21,7 +21,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #87ea66 0%, #54bbe0 100%);
             color: white;
             padding: 30px;
             text-align: center;
@@ -44,19 +44,19 @@
         .upload-section {
             margin-bottom: 30px;
             padding: 25px;
-            border: 2px dashed #667eea;
+            border: 2px dashed #f0dc43;
             border-radius: 12px;
             background: #f8f9ff;
             transition: all 0.3s;
         }
 
         .upload-section:hover {
-            border-color: #764ba2;
+            border-color: #94e83f;
             background: #f0f2ff;
         }
 
         .upload-section h3 {
-            color: #667eea;
+            color: #b0e265;
             margin-bottom: 15px;
             font-size: 1.3em;
         }
@@ -80,7 +80,7 @@
         .file-input-label {
             display: block;
             padding: 15px 25px;
-            background: #667eea;
+            background: #000000;
             color: white;
             border-radius: 8px;
             cursor: pointer;
@@ -90,9 +90,9 @@
         }
 
         .file-input-label:hover {
-            background: #764ba2;
+            background: #7fc232;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 5px 15px rgba(176, 207, 25, 0.4);
         }
 
         .file-info {
@@ -149,7 +149,7 @@
         }
 
         .settings-section h3 {
-            color: #667eea;
+            color: #1fae35;
             margin-bottom: 20px;
         }
 
@@ -185,7 +185,7 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: #667eea;
+            background: #df4fd3;
             cursor: pointer;
         }
 
@@ -193,7 +193,7 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: #667eea;
+            background: #ee6148;
             cursor: pointer;
             border: none;
         }
@@ -202,7 +202,7 @@
             min-width: 50px;
             text-align: right;
             font-weight: 600;
-            color: #667eea;
+            color: #c0d122;
         }
 
         .checkbox-wrapper {
@@ -220,7 +220,7 @@
         .process-btn {
             width: 100%;
             padding: 18px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #c2ea66 0%, #d2db58 100%);
             color: white;
             border: none;
             border-radius: 12px;
@@ -257,7 +257,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(90deg, #caf167 0%, #f4f750 100%);
             width: 0%;
             transition: width 0.3s;
             display: flex;
