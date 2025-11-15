@@ -3,18 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Face Matching Photo Sorter</title>
+    <title>Face Matching Photo Sorter with AI Enhancement</title>
    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="video-background">
+        <video autoplay loop muted plays-inline class="background-clip">
+            <source src="C:\Users\Lenovo\Downloads\videoplayback (1).mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="container"> 
         <div class="header">
-            <h1>🔍 Face Matching Photo Sorter</h1>
-            <p>Upload reference photos and find matching faces automatically</p>
+            <h1>AI-Powered Face Matching & Enhancement</h1>
+            <p>Upload, match, and enhance photos automatically</p>
+            <span class="badge">NEW: AI Photo Enhancement</span>
         </div>
 
         <div class="content">
-            <!-- Reference Images Upload -->
             <div class="upload-section">
                 <h3>📸 Step 1: Upload Reference Image(s)</h3>
                 <p>Select one or more photos of the person you want to find. Multiple images improve accuracy!</p>
@@ -28,9 +34,8 @@
                 <div id="referencePreview" class="preview-container"></div>
             </div>
 
-            <!-- Photos to Match Upload -->
             <div class="upload-section">
-                <h3>📁 Step 2: Upload Photos to Search</h3>
+                <h3>Upload Photos to Search</h3>
                 <p>Select all the photos you want to search through for matching faces.</p>
                 <div class="file-input-wrapper">
                     <input type="file" id="photosInput" accept="image/*" multiple>
@@ -41,9 +46,8 @@
                 <div id="photosInfo" class="file-info" style="display:none;"></div>
             </div>
 
-            <!-- Settings -->
             <div class="settings-section">
-                <h3>⚙️ Settings</h3>
+                <h3>Settings</h3>
                 
                 <div class="setting-item">
                     <label>Match Strictness (lower = stricter matching)</label>
@@ -68,14 +72,41 @@
                         <label for="qualityCheck">Skip low quality/blurry images</label>
                     </div>
                 </div>
+
+                <div class="setting-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="enableEnhancement" checked>
+                        <label for="enableEnhancement">✨ Enable AI Photo Enhancement (BETA)</label>
+                    </div>
+                    <div id="enhancementOptions" class="enhancement-options active">
+                        <div class="enhancement-option">
+                            <input type="checkbox" id="enhanceBrightness" checked>
+                            <label for="enhanceBrightness">Auto-brightness correction</label>
+                        </div>
+                        <div class="enhancement-option">
+                            <input type="checkbox" id="enhanceContrast" checked>
+                            <label for="enhanceContrast">Enhance contrast</label>
+                        </div>
+                        <div class="enhancement-option">
+                            <input type="checkbox" id="enhanceSaturation" checked>
+                            <label for="enhanceSaturation">Color enhancement</label>
+                        </div>
+                        <div class="enhancement-option">
+                            <input type="checkbox" id="enhanceSharpness" checked>
+                            <label for="enhanceSharpness">Sharpen details</label>
+                        </div>
+                        <div class="enhancement-option">
+                            <input type="checkbox" id="enhanceNoise">
+                            <label for="enhanceNoise">Noise reduction (slower)</label>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Process Button -->
             <button class="process-btn" id="processBtn" disabled>
                 Start Processing
             </button>
 
-            <!-- Progress Section -->
             <div class="progress-section" id="progressSection">
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill">0%</div>
@@ -86,10 +117,8 @@
                 </div>
             </div>
 
-            <!-- Logs -->
             <div class="log-section" id="logSection"></div>
 
-            <!-- Results -->
             <div class="results-section" id="resultsSection">
                 <h3>✅ Processing Complete!</h3>
                 <div class="stats">
@@ -102,25 +131,54 @@
                         <div class="label">Matches Found</div>
                     </div>
                     <div class="stat-card">
+                        <div class="number" id="enhancedPhotos">0</div>
+                        <div class="label">Enhanced</div>
+                    </div>
+                    <div class="stat-card">
                         <div class="number" id="successRate">0%</div>
                         <div class="label">Success Rate</div>
                     </div>
                 </div>
-                <button class="download-btn" id="downloadBtn">
-                    📥 Download Matched Photos (ZIP)
-                </button>
+                <div class="download-buttons">
+                    <button class="download-btn original" id="downloadOriginalBtn">
+                        📥 Download Original Photos
+                    </button>
+                    <button class="download-btn enhanced" id="downloadEnhancedBtn" style="display:none;">
+                        ✨ Download Enhanced Photos
+                    </button>
+                </div>
+                
+                <div class="share-section" style="margin-top: 20px;">
+                    <h4 style="color: #667eea; margin-bottom: 15px;">🔗 Share Your Results</h4>
+                    <div class="share-buttons" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <button class="share-btn" id="shareOriginalBtn" onclick="sharePhotos(false)">
+                            🔗 Share Original Photos
+                        </button>
+                        <button class="share-btn" id="shareEnhancedBtn" onclick="sharePhotos(true)" style="display:none;">
+                            ✨ Share Enhanced Photos
+                        </button>
+                    </div>
+                    <div id="shareResult" class="share-result"></div>
+                </div>
                 <div class="matched-gallery" id="matchedGallery"></div>
             </div>
         </div>
 
         <div class="footer">
-            <p>Created by Arpit, Abhijeet & Krishna | Powered by face-api.js</p>
+            <p>Created by Arpit, Abhijeet & Krishna | Powered by face-api.js & AI Enhancement</p>
+        </div>
+    </div> <div class="modal" id="comparisonModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2 style="margin-bottom: 20px;">Before & After Comparison</h2>
+            <div id="comparisonContent"></div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
- <script src="script.js"></script>   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
+<script src="script.js"></script>
 </body>
 </html>
